@@ -11,7 +11,7 @@ export default defineConfig({
     ["html", { outputFolder: "playwright-report", open: "never" }],
   ],
   use: {
-    baseURL: process.env.BASE_URL || "http://127.0.0.1:3000",
+    baseURL: process.env.BASE_URL || "http://localhost:3000",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
@@ -19,8 +19,8 @@ export default defineConfig({
   webServer: process.env.BASE_URL
     ? undefined
     : {
-        command: "npm run dev",
-        url: "http://127.0.0.1:3000",
+        command: process.env.CI ? "npm run start" : "npm run dev",
+        url: "http://localhost:3000",
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,
       },
