@@ -78,7 +78,7 @@ export default function Home() {
             <div><p className="mb-1 text-sm font-semibold text-[#16747a]">MONDAY, SEPTEMBER 7</p><h1 className="text-3xl font-bold tracking-tight md:text-4xl">Good morning, Temi</h1><p className="mt-2 text-slate-500">Here is what is happening across your business today.</p></div>
             <Dialog><DialogTrigger asChild><Button className="h-11 rounded-xl bg-[#16747a] px-5 hover:bg-[#105f64]"><PackagePlus /> Add product</Button></DialogTrigger>
               <DialogContent className="rounded-2xl"><DialogHeader><DialogTitle>Add a product</DialogTitle><DialogDescription>Create a new inventory item for your store.</DialogDescription></DialogHeader>
-                <label className="space-y-2 text-sm font-semibold">Product name<Input value={productName} onChange={(e) => setProductName(e.target.value)} placeholder="Premium gift box" /></label>
+                <label htmlFor="product-name" className="space-y-2 text-sm font-semibold">Product name<Input id="product-name" value={productName} onChange={(e) => setProductName(e.target.value)} placeholder="Premium gift box" /></label>
                 <DialogFooter><DialogClose asChild><Button variant="outline">Cancel</Button></DialogClose><DialogClose asChild><Button disabled={!productName.trim()} onClick={() => { setProducts(products + 1); setProductName(""); }} className="bg-[#16747a]">Save product</Button></DialogClose></DialogFooter>
               </DialogContent>
             </Dialog>
