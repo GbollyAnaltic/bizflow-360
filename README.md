@@ -20,6 +20,10 @@ BizFlow 360 brings those workflows into one reliable platform.
 - Recent order tracking and search
 - Product creation workflow
 - Responsive, accessible navigation
+- ASP.NET Core 8 REST API for products, customers, inventory, and orders
+- PostgreSQL persistence and realistic seed data
+- Transactional stock deduction and cancellation restocking
+- Backend unit tests, Docker Compose, Swagger, and health checks
 
 ## Technology
 
@@ -28,11 +32,23 @@ BizFlow 360 brings those workflows into one reliable platform.
 - TypeScript
 - Tailwind CSS
 - Radix UI
+- C# / ASP.NET Core 8
+- PostgreSQL 16 / Entity Framework Core
+- Docker Compose
+
+## Backend
+
+The production-style backend lives in [`backend`](backend). Start the API and PostgreSQL database with:
+
+```bash
+docker compose up --build
+```
+
+Open Swagger at [http://localhost:8080/swagger](http://localhost:8080/swagger). See the [backend documentation](backend/README.md) for endpoints and configuration.
 
 ## Planned engineering work
 
-- ASP.NET Core Web API
-- PostgreSQL and Entity Framework Core
+- Connect the Next.js dashboard to the REST API
 - JWT authentication and role-based access
 - Stripe test payments
 - Redis caching and background events
@@ -58,7 +74,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Status
 
-Phase 1 is in active development. The dashboard is complete; backend services, persistence, authentication, and automation are next.
+Phase 2 is in active development. The dashboard, core backend, PostgreSQL persistence, and initial QA automation are complete. Authentication, payments, and cloud backend deployment are next.
 
 ## Author
 
