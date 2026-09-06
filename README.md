@@ -2,6 +2,10 @@
 
 A full-stack small-business operations platform for managing products, inventory, orders, customers, payments, and business insights from one workspace.
 
+## Live demo
+
+[Launch BizFlow 360](https://bizflow-360-3t42cfwym-bwiseverse.vercel.app/)
+
 ## Why I built it
 
 Small businesses often manage daily operations across paper records, messaging apps, and spreadsheets. This creates lost orders, inaccurate stock counts, missed payments, and limited visibility into business performance.
