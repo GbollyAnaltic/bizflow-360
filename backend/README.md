@@ -57,3 +57,15 @@ Cors__AllowedOrigins__0=https://your-frontend.example
 ```
 
 The committed password is for local Docker development only.
+
+## Deploy to Render
+
+The repository includes `render.yaml`, which creates the Docker API and PostgreSQL database together.
+
+1. In Render, choose **New > Blueprint**.
+2. Connect `GbollyAnaltic/bizflow-360`.
+3. Render detects `render.yaml`; approve the two resources.
+4. After deployment, copy the API service URL.
+5. In Vercel, add `NEXT_PUBLIC_API_URL` with that URL and redeploy the frontend.
+
+Render supplies `DATABASE_URL` securely. The API converts the managed PostgreSQL URL to an Npgsql connection string during startup.
