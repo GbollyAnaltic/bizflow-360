@@ -72,9 +72,19 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Connect the frontend to the API
+
+Copy `.env.example` to `.env.local`, then set the address of your ASP.NET Core API:
+
+```text
+NEXT_PUBLIC_API_URL=http://localhost:8080
+```
+
+The dashboard loads summary totals, recent orders, and low-stock products from PostgreSQL through the API. The Add Product form also saves directly to PostgreSQL.
+
 ## Status
 
-Phase 2 is in active development. The dashboard, core backend, PostgreSQL persistence, and initial QA automation are complete. Authentication, payments, and cloud backend deployment are next.
+Phase 2 is in active development. The dashboard is connected to the core backend, PostgreSQL persistence, and initial QA automation. Authentication, payments, and cloud backend deployment are next.
 
 ## Author
 
