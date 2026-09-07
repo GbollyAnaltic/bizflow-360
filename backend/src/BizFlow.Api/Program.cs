@@ -2,10 +2,10 @@ using System.Text.Json.Serialization;
 using BizFlow.Api.Data;
 using BizFlow.Api.Services;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("Postgres")
-    ?? throw new InvalidOperationException("ConnectionStrings:Postgres is required.");
+var connectionString = GetPostgresConnectionString(builder.Configuration);
 
 builder.Services.AddDbContext<BizFlowDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddScoped<IOrderService, OrderService>();
@@ -35,5 +35,26 @@ if (app.Configuration.GetValue("Database:Initialize", true))
     await DatabaseInitializer.InitializeAsync(app.Services);
 
 app.Run();
+
+static string GetPostgresConnectionString(IConfiguration configuration)
+{
+    var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+    if (!string.IsNullOrWhiteSpace(databaseUrl) && Uri.TryCreate(databaseUrl, UriKind.Absolute, out var uri))
+    {
+        var credentials = uri.UserInfo.Split(':', 2);
+        return new NpgsqlConnectionStringBuilder
+        {
+            Host = uri.Host,
+            Port = uri.Port > 0 ? uri.Port : 5432,
+            Database = uri.AbsolutePath.TrimStart('/'),
+            Username = Uri.UnescapeDataString(credentials[0]),
+            Password = credentials.Length > 1 ? Uri.UnescapeDataString(credentials[1]) : "",
+            SslMode = SslMode.Require
+        }.ConnectionString;
+    }
+
+    return configuration.GetConnectionString("Postgres")
+        ?? throw new InvalidOperationException("Set DATABASE_URL or ConnectionStrings:Postgres.");
+}
 
 public partial class Program;
